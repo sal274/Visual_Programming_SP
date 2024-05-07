@@ -1,0 +1,57 @@
+@page "/profile"
+
+@layout MainLayout
+
+@using WriteOn.Shared
+
+@inject CurrentUserState CurrentUserState
+
+<head>
+    <link href="css/profilepage.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>My Profile</h2>
+        </div>
+        <div class="profile-details">
+            <div class="profile-info">
+                <div class="profile-details">
+                    <span>Username:</span>
+                    <span>PLACEHOLDER VALUE</span>
+                </div>
+                <div class="profile-details">
+                    <span>Full Name:</span>
+                    <span>PLACEHOLDER VALUE</span>
+                </div>
+                <div class="profile-details">
+                    <span>Email:</span>
+                    <span>PLACEHOLDER VALUE</span>
+                </div>
+                <div class="profile-details">
+                    <span>Pen Name:</span>
+                    <span>PLACEHOLDER VALUE</span>
+                </div>
+                <div class="profile-details">
+                    <span>Biography:</span>
+                    <p>PLACEHOLDER VALUE</p>
+                </div>
+            </div>
+        </div>
+        <h2>Articles</h2>
+        <div class="article-list">
+            <h3>No articles found yet.</h3>
+        </div>
+        <h2>Reviews</h2>
+        <div class="article-list">
+            <h3>No reviews found yet.</h3>
+        </div>
+    </div>
+</body>
+
+@code {
+    // TODO: Get current user's data from the database using the id
+    // in CurrentUserState, and replace above PLACEHOLDERS with
+    // retrieved values
+}

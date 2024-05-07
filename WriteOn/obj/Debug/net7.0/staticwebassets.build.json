@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fLLJIBt7TJnHODVwmsf4g6gDmMe21cULCxkeAM4oRE4=",
+  "Hash": "ws71Dau+qyycuhm+j+800AFbi0wMi7ic7BPw9Uu7oHY=",
   "Source": "WriteOn",
   "BasePath": "_content/WriteOn",
   "Mode": "Default",
@@ -36,6 +36,25 @@
       "OriginalItemSpec": "wwwroot\\css\\homepage.css"
     },
     {
+      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\loginsignup.css",
+      "SourceId": "WriteOn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "BasePath": "_content/WriteOn",
+      "RelativePath": "css/loginsignup.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\loginsignup.css"
+    },
+    {
       "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\mainlayout.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
@@ -53,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\mainlayout.css"
+    },
+    {
+      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\profilepage.css",
+      "SourceId": "WriteOn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "BasePath": "_content/WriteOn",
+      "RelativePath": "css/profilepage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\profilepage.css"
     },
     {
       "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\site.css",

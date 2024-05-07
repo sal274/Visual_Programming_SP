@@ -1,0 +1,61 @@
+@page "/signup"
+
+@using WriteOn.Shared
+
+@inject CurrentUserState CurrentUserState
+@inject NavigationManager NavigationManager
+
+<head>
+    <link href="css/loginsignup.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>WriteOn</h1>
+    <div class="container">
+        <div class="login-form">
+            <h2>Sign Up</h2>
+            <form action="/home"> @* TODO *@
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" @bind="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" @bind="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" @bind="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" @bind="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">Sign Up</button>
+            </form>
+            <div class="link">
+                <a href="/login">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+@code {
+    private string username { get; set; }
+    private string email { get; set; }
+    private string password { get; set; }
+    private string confirmPassword { get; set; }
+
+    // Placeholder for signup logic (database interaction)
+    private async Task HandleSignup()
+    {
+        // Placeholder logic for validation (check password match, etc.)
+        if (password != confirmPassword)
+        {
+            // Handle password mismatch error
+            return;
+        }
+
+        // TODO: Replace with actual database call to create a new user
+    }
+}

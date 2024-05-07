@@ -1,0 +1,53 @@
+@page "/"
+
+@using WriteOn.Shared
+
+@inject NavigationManager NavigationManager
+@inject CurrentUserState CurrentUserState
+
+<head>
+    <link href="css/loginsignup.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>WriteOn</h1>
+    <div class="container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form action="/home">  @* TODO: Authenticate user *@
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" @bind="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" @bind="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <div class="link">
+                <a href="/signup">Don't have an account? Sign Up</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+@code {
+    private string username { get; set; }
+    private string password { get; set; }
+
+    // Placeholder for authentication logic (database interaction)
+    private async Task HandleLogin()
+    {
+        // TODO: Replace with actual database call to check username and password
+        if (username == "test" && password == "test")
+        {
+            // Login successful (replace with actual logic)
+            // TODO: Set
+        }
+        else
+        {
+            // Login failed (replace with error handling)
+        }
+    }
+}

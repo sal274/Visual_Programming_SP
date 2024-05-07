@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using WriteOn.Data;
+using WriteOn.Shared;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddSqlite<WriteOnDbContext>("Data Source=WriteOnDatabase.db");
+builder.Services.AddScoped<CurrentUserState>();
 
 var app = builder.Build();
 

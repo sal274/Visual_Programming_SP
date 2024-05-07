@@ -22,12 +22,28 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = RW1wdHlMYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = TWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Pages/ProfilePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Pages/Signup.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnbnVwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Pages/WritingPage.razor]
