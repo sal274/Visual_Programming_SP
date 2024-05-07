@@ -10,7 +10,7 @@
         <div class="navigation-buttons">
             <a href="/write" class="@(NavButtonClass("write"))">Write</a>
             <a href="/profile" class="@(NavButtonClass("profile"))">Profile</a>
-            <a href="/" class="@(NavButtonClass("home"))">Home Page</a>
+            <a href="/home" class="@(NavButtonClass("home"))">Home</a>
         </div>
         <div class="app-title">WriteOn</div>
     </div>
@@ -19,15 +19,8 @@
 @Body
 
 @code {
-    private string activeRoute;
-
-    protected override void OnInitialized()
-    {
-        activeRoute = NavigationManager.Uri;
-    }
-
     private string NavButtonClass(string buttonName)
     {
-        return activeRoute.Contains(buttonName) ? "active" : "";
+        return NavigationManager.Uri.Contains(buttonName) ? "active" : "";
     }
 }

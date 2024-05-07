@@ -24,11 +24,13 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 1rem;
-    padding: 4rem
+    padding: 4rem;
+    text-align: left;
 }
 
 .article-card h2 {
     margin: 0;
+    text-align: center;
 }
 
 .article-card a {
@@ -41,6 +43,7 @@ body {
     color: #999;
     margin-bottom: 0.5rem;
     padding: 1rem;
+    text-align: center;
 }
 
 .article-meta span {
