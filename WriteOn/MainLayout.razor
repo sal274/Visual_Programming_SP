@@ -1,0 +1,33 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<head>
+    <link href="css/mainlayout.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navigation-bar">
+        <div class="navigation-buttons">
+            <a href="/write" class="@(NavButtonClass("write"))">Write</a>
+            <a href="/profile" class="@(NavButtonClass("profile"))">Profile</a>
+            <a href="/" class="@(NavButtonClass("home"))">Home Page</a>
+        </div>
+        <div class="app-title">WriteOn</div>
+    </div>
+</body>
+
+@Body
+
+@code {
+    private string activeRoute;
+
+    protected override void OnInitialized()
+    {
+        activeRoute = NavigationManager.Uri;
+    }
+
+    private string NavButtonClass(string buttonName)
+    {
+        return activeRoute.Contains(buttonName) ? "active" : "";
+    }
+}

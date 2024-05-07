@@ -1,0 +1,23 @@
+@page "/write"
+
+@layout MainLayout
+
+@using WriteOn.Models
+
+<head>
+    <link href="css/writingpage.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form method="post">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post Article (Not Functional Yet)</button>
+    </form>
+</body>

@@ -1,0 +1,77 @@
+﻿@page "/"
+
+@layout MainLayout
+
+@using WriteOn.Models
+
+<head>
+    <link href="css/homepage.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="homepage-container">
+        <div class="article-cards">
+            @if (!Articles.Any())
+            {
+                <p>There are no articles yet. Be the first one to write one!</p>
+            }
+            else
+            {
+                @foreach (var article in Articles)
+                {
+                    <div class="article-card">
+                        <h2>@article.Title</h2>
+                        <div class="article-meta">
+                            <span>By @article.AuthorName</span>
+                            <span class="published-date">Published: @article.PublishDate.ToString("yyyy-MM-dd")</span>
+                        </div>
+                        <div class="article-content">
+                            @article.Content
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+
+@code {
+    private List<Article> Articles { get; set; } = new List<Article>();
+
+    // SAMPLE DATA FOR TESTING
+    Article article1 = new Article
+        {
+            ArticleID = 1,
+            AuthorID = 1,
+            AuthorName = "Bob Something",
+            Title = "The Power of Words: How Writing Can Transform Your Life",
+            Content = @"Writing is a powerful tool that can be used for self-expression, creativity, and personal growth. When we
+put our thoughts and feelings onto paper (or screen), it allows us to gain a deeper understanding of ourselves and the
+world around us. Whether you're journaling your experiences, crafting stories, or simply jotting down ideas, writing can
+have a profound impact on your life.
+
+Here are just a few benefits of writing regularly:
+
+* Improved self-awareness: Writing allows you to explore your inner world and gain a clearer understanding of your
+thoughts, emotions, and motivations. By reflecting on your experiences through writing, you can identify patterns,
+overcome challenges, and set goals for the future.
+* Enhanced creativity: Writing is a great way to spark creativity and develop your imagination. The act of putting words
+together can lead to new ideas, stories, and solutions to problems.
+* Stress reduction: Writing can be a therapeutic outlet for stress and anxiety. When you express your worries and
+frustrations on paper, it can help you to release them and gain a new perspective.
+* Sharper thinking: Writing helps to organize your thoughts and clarify your ideas. The process of forming complex
+sentences and arguments can improve your critical thinking skills and communication abilities.
+* Stronger memory: Writing down information can help you to remember it better. The act of physically writing something
+down or typing it out creates a stronger memory trace than simply reading or hearing it.
+
+So, if you're looking for a way to improve your life, I encourage you to pick up a pen (or open a writing app) and start
+writing. You might be surprised at the positive impact it can have!",
+            PublishDate = DateTime.Now,
+            Category = "Non-Fiction",
+            IsDraft = false
+        };
+    protected override void OnInitialized()
+    {
+        Articles.Add(article1);
+    }
+}
