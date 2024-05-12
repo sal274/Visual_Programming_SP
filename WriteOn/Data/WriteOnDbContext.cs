@@ -13,7 +13,6 @@ public class WriteOnDbContext : DbContext
   public DbSet<UserCredentials> UserCredentials { get; set; }
   public DbSet<UserAccount> UserAccounts { get; set; }
   public DbSet<Article> Articles { get; set; }
-  public DbSet<ArticleReward> ArticleRewards { get; set; }
   public DbSet<ArticleReview> ArticleReviews { get; set; }
   public DbSet<ArticleComment> ArticleComments { get; set; }
   public DbSet<Admin> Admins { get; set; }
