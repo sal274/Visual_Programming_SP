@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\commentspage.css",
+      "PackagePath": "staticwebassets\\css\\commentspage.css"
+    },
+    {
       "Id": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\homepage.css",
       "PackagePath": "staticwebassets\\css\\homepage.css"
     },

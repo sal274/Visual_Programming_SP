@@ -3,19 +3,19 @@ body {
     background-color: #E8DCB8;
 }
 
-.homepage-container {
+.comment-container {
     text-align: center;
     padding: 2rem;
 }
 
-.article-cards {
+.comment-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 2rem;
 }
 
-.article-card {
+.comment-card {
     width: 100%;
     background-color: #f5f5f5;
     border-radius: 5px;
@@ -28,17 +28,12 @@ body {
     text-align: left;
 }
 
-.article-card h2 {
-    margin: 0;
-    text-align: center;
-}
-
-.article-card a {
+.comment-card a {
     text-decoration: none;
     color: #007bff;
 }
 
-.article-meta {
+.comment-meta {
     font-size: 0.8rem;
     color: #999;
     margin-bottom: 0.5rem;
@@ -46,7 +41,7 @@ body {
     text-align: center;
 }
 
-.article-meta span {
+.comment-meta span {
     margin-right: 1rem;
 }
 
@@ -54,7 +49,7 @@ body {
     font-style: italic;
 }
 
-.article-content {
+.comment-content {
     padding: 2rem;
     line-height: 1.5;
 }
@@ -72,7 +67,22 @@ body {
     background-color: #222;
 }
 
-.link a {
-    color: f5f5f5;
-    text-decoration: none;
+form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-control {
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }

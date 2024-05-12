@@ -13,7 +13,9 @@
         <div class="article-cards">
             @if (!Articles.Any())
             {
-                <p>There are no articles yet. Be the first one to write one!</p>
+                <div class="article-card">
+                    <p>There are no articles yet. Be the first one to write one!</p>
+                </div>
             }
             else
             {
@@ -23,10 +25,14 @@
                         <h2>@article.Title</h2>
                         <div class="article-meta">
                             <span>By @article.AuthorName</span>
-                            <span class="published-date">Published: @article.PublishDate.ToString("yyyy-MM-dd")</span>
+                            <span class="published-date">Published: @article.PublishDate</span>
                         </div>
                         <div class="article-content">
                             @article.Content
+                        </div>
+                        <div class="article-footer">
+                            <span><a href="/comments/@article.ArticleID"><button type="submit" class="btn-primary">comments</button></a></span>
+                            <span><a href="/review/@article.ArticleID"><button type="submit" class="btn-primary">review</button></a></span>
                         </div>
                     </div>
                 }
@@ -37,6 +43,35 @@
 
 @code {
     private List<Article> Articles { get; set; } = new List<Article>();
+
+    // TEST DATA
+    protected override void OnInitialized()
+    {
+        var newArticle1 = new Article
+        {
+            ArticleID = 1,
+            AuthorID = 1,
+            AuthorName = "John Doe",
+            Title = "Article 1",
+            Content = "Article 1 content",
+            PublishDate = "01-01-2000",
+            Category = "Fiction"
+        };
+
+        var newArticle2 = new Article
+        {
+            ArticleID = 2,
+            AuthorID = 2,
+            AuthorName = "Jane Doe",
+            Title = "Article 2",
+            Content = "Article 2 content",
+            PublishDate = "01-02-2000",
+            Category = "Non-fiction"
+        };
+
+        Articles.Add(newArticle1);
+        Articles.Add(newArticle2);
+    }
 
     // TODO: Get the list of articles from the database
 }
