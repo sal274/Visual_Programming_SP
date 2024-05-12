@@ -3,7 +3,18 @@
 @using WriteOn.Shared;
 
 @inject CurrentUserState CurrentUserState
+@inject NavigationManager NavigationManager
 
 @code {
-    // TODO
+    // FOR TESTING
+    protected override void OnInitialized()
+    {
+        try
+        {
+            NavigationManager.NavigateTo(NavigationManager.BaseUri + "home");
+        }
+        catch (Exception) {}
+    }
+
+    // TODO: Validate user credentials using the database
 }

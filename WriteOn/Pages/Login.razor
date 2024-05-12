@@ -2,7 +2,6 @@
 
 @using WriteOn.Shared
 
-@inject NavigationManager NavigationManager
 @inject CurrentUserState CurrentUserState
 
 <head>
@@ -14,7 +13,7 @@
     <div class="container">
         <div class="login-form">
             <h2>Login</h2>
-            <form action="/loginhandler">
+            <form>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" @bind="CurrentUserState.Username" required>
@@ -23,8 +22,8 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" @bind="CurrentUserState.Password" required>
                 </div>
-                <button type="submit" class="btn-primary">Login</button>
             </form>
+            <a href="/loginhandler"><button type="submit" class="btn-primary">Login</button></a>
             <div class="link">
                 <a href="/signup">Don't have an account? Sign Up</a>
             </div>

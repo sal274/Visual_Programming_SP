@@ -10,6 +10,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
 builder.Services.AddSqlite<WriteOnDbContext>("Data Source=WriteOnDatabase.db");
 builder.Services.AddScoped<CurrentUserState>();
+builder.Services.AddScoped<NewUserState>();
 
 var app = builder.Build();
 

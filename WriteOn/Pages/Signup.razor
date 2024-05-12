@@ -2,7 +2,7 @@
 
 @using WriteOn.Shared
 
-@inject CurrentUserState CurrentUserState
+@inject NewUserState NewUserState
 @inject NavigationManager NavigationManager
 
 <head>
@@ -14,48 +14,28 @@
     <div class="container">
         <div class="login-form">
             <h2>Sign Up</h2>
-            <form action="/signuphandler">
+            <form>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="username" @bind="username" required>
+                    <input type="text" id="username" name="username" @bind="NewUserState.Username" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" @bind="email" required>
+                    <input type="email" id="email" name="email" @bind="NewUserState.Email" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" @bind="password" required>
+                    <input type="password" id="password" name="password" @bind="NewUserState.Password" required>
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" @bind="confirmPassword" required>
+                    <input type="password" id="confirmPassword" name="confirmPassword" @bind="NewUserState.ConfirmPassword" required>
                 </div>
-                <button type="submit" class="btn-primary">Sign Up</button>
             </form>
+            <a href="/signuphandler"><button type="submit" class="btn-primary">Sign Up</button></a>
             <div class="link">
                 <a href="/login">Already have an account? Login</a>
             </div>
         </div>
     </div>
 </body>
-
-@code {
-    private string username { get; set; }
-    private string email { get; set; }
-    private string password { get; set; }
-    private string confirmPassword { get; set; }
-
-    // Placeholder for signup logic (database interaction)
-    private async Task HandleSignup()
-    {
-        // Placeholder logic for validation (check password match, etc.)
-        if (password != confirmPassword)
-        {
-            // Handle password mismatch error
-            return;
-        }
-
-        // TODO: Replace with actual database call to create a new user
-    }
-}
