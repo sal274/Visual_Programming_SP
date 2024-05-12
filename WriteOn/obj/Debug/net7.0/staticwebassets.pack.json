@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\profilepage.css"
     },
     {
+      "Id": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\reviewpage.css",
+      "PackagePath": "staticwebassets\\css\\reviewpage.css"
+    },
+    {
       "Id": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "v/uG2UYWAw2GQSzcZfsA/VXfULd4l///OMq5Q6GWSDI=",
+  "Hash": "RV315kclEy1f3qG0vnRB9a+onpxsj7g3Bf7UNcD91qw=",
   "Source": "WriteOn",
   "BasePath": "_content/WriteOn",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\profilepage.css"
+    },
+    {
+      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\reviewpage.css",
+      "SourceId": "WriteOn",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "BasePath": "_content/WriteOn",
+      "RelativePath": "css/reviewpage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\reviewpage.css"
     },
     {
       "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\site.css",
