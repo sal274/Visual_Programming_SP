@@ -1,4 +1,4 @@
-@page "/comments/{ArticleId}"
+@page "/comments/{ArticleID}"
 
 @layout MainLayout
 
@@ -49,7 +49,7 @@
     private List<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
 
     [Parameter]
-    public string ArticleId { get; set; }
+    public string ArticleID { get; set; }
 
     // TEST DATA
     protected override void OnInitialized()
