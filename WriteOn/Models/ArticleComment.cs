@@ -8,5 +8,4 @@ public class ArticleComment
     public required string CommenterName { get; set; }
     public required string Content { get; set; }  // Content of the comment
     public required string CommentDate { get; set; }  // Date and time the comment was written
-    public List<ArticleCommentHistory> History { get; set; } = new List<ArticleCommentHistory>();  // One-to-Many with ArticleCommentHistory
 }
