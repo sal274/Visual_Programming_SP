@@ -24,8 +24,8 @@
                     <div class="article-card">
                         <h2>@article.Title</h2>
                         <div class="article-meta">
-                            <span>By @article.AuthorName</span>
-                            <span class="published-date">Published: @article.PublishDate</span>
+                            <span>by @article.AuthorName</span>
+                            <span class="published-date">published: @article.PublishDate</span>
                         </div>
                         <div class="article-content">
                             @article.Content
@@ -33,7 +33,7 @@
                         <div class="article-footer">
                             <span><a href="/comments/@article.ArticleID"><button type="submit" class="btn-primary">comments</button></a></span>
                             <span><a href="/review/@article.ArticleID"><button type="submit" class="btn-primary">review</button></a></span>
-                            <span><a href="/user/@article.AuthorID"><button type="submit" class="btn-primary">Writer Profile</button></a></span>
+                            <span><a href="/user/@article.AuthorID"><button type="submit" class="btn-primary">writer profile</button></a></span>
                         </div>
                     </div>
                 }
