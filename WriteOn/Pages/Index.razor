@@ -24,7 +24,7 @@
                     <div class="article-card">
                         <h2>@article.Title</h2>
                         <div class="article-meta">
-                            <span>by @article.AuthorName</span>
+                            <span>by @article.AuthorUsername</span>
                             <span class="published-date">published: @article.PublishDate</span>
                         </div>
                         <div class="article-content">
@@ -33,7 +33,7 @@
                         <div class="article-footer">
                             <span><a href="/comments/@article.ArticleID"><button type="submit" class="btn-primary">comments</button></a></span>
                             <span><a href="/review/@article.ArticleID"><button type="submit" class="btn-primary">review</button></a></span>
-                            <span><a href="/user/@article.AuthorID"><button type="submit" class="btn-primary">writer profile</button></a></span>
+                            <span><a href="/user/@article.AuthorUsername"><button type="submit" class="btn-primary">writer profile</button></a></span>
                         </div>
                     </div>
                 }
@@ -51,8 +51,7 @@
         var newArticle1 = new Article
         {
             ArticleID = 1,
-            AuthorID = 1,
-            AuthorName = "John Doe",
+            AuthorUsername = "John Doe",
             Title = "Article 1",
             Content = "Article 1 content",
             PublishDate = "01-01-2000",
@@ -62,8 +61,7 @@
         var newArticle2 = new Article
         {
             ArticleID = 2,
-            AuthorID = 2,
-            AuthorName = "Jane Doe",
+            AuthorUsername = "Jane Doe",
             Title = "Article 2",
             Content = "Article 2 content",
             PublishDate = "01-02-2000",
