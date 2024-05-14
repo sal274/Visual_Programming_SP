@@ -1,4 +1,4 @@
-@page "/user/{UserID}"
+@page "/user/{Username}"
 
 @layout MainLayout
 
@@ -44,7 +44,7 @@
 
 @code {
     [Parameter]
-    public string UserID { get; set; }
+    public string Username { get; set; }
 
     // TODO: Get writer's data from the database using the UserID,
     // and replace above PLACEHOLDERS with retrieved values
