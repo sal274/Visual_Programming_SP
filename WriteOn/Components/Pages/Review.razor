@@ -1,0 +1,27 @@
+@page "/review/{ArticleID}"
+@* @rendermode InteractiveServer *@
+
+@using WriteOn.Components.Layout
+
+@layout WriteOn.Components.Layout.MainLayout
+
+@using WriteOn.Models
+
+<head>
+    <link href="css/reviewpage.css" rel="stylesheet" />
+</head>
+
+<form method="post">
+    <div class="form-group">
+        <label for="content">your review</label>
+        <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">submit review (Not Functional Yet)</button>
+</form>
+
+@code {
+    [Parameter]
+    public string ArticleID { get; set; }
+    
+    // TODO: Save article review in database
+}

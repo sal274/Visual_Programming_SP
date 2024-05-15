@@ -1,0 +1,76 @@
+﻿@page "/home"
+
+@using WriteOn.Components.Layout
+
+@layout MainLayout
+
+@using WriteOn.Models
+
+<head>
+    <link href="css/homepage.css" rel="stylesheet" />
+</head>
+
+<div class="homepage-container">
+    <div class="article-cards">
+        @if (!Articles.Any())
+        {
+            <div class="article-card">
+                <p>There are no articles yet. Be the first one to write one!</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var article in Articles)
+            {
+                <div class="article-card">
+                    <h2>@article.Title</h2>
+                    <div class="article-meta">
+                        <span>by @article.AuthorUsername</span>
+                        <span class="published-date">published: @article.PublishDate</span>
+                    </div>
+                    <div class="article-content">
+                        @article.Content
+                    </div>
+                    <div class="article-footer">
+                        <span><a href="/comments/@article.ArticleID"><button type="submit" class="btn-primary">comments</button></a></span>
+                        <span><a href="/review/@article.ArticleID"><button type="submit" class="btn-primary">review</button></a></span>
+                        <span><a href="/user/@article.AuthorUsername"><button type="submit" class="btn-primary">writer profile</button></a></span>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<Article> Articles { get; set; } = new List<Article>();
+
+    // TEST DATA
+    protected override void OnInitialized()
+    {
+        var newArticle1 = new Article
+        {
+            ArticleID = 1,
+            AuthorUsername = "John Doe",
+            Title = "Article 1",
+            Content = "Article 1 content",
+            PublishDate = "01-01-2000",
+            Category = "Fiction"
+        };
+
+        var newArticle2 = new Article
+        {
+            ArticleID = 2,
+            AuthorUsername = "Jane Doe",
+            Title = "Article 2",
+            Content = "Article 2 content",
+            PublishDate = "01-02-2000",
+            Category = "Non-fiction"
+        };
+
+        Articles.Add(newArticle1);
+        Articles.Add(newArticle2);
+    }
+
+    // TODO: Get the list of articles from the database
+}

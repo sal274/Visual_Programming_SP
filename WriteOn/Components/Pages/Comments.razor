@@ -1,0 +1,81 @@
+@page "/comments/{ArticleID}"
+@* @rendermode InteractiveServer *@
+
+@using WriteOn.Components.Layout
+
+@layout MainLayout
+
+@using WriteOn.Models
+
+<head>
+    <link href="css/commentspage.css" rel="stylesheet" />
+</head>
+
+<div class="comment-container">
+    <div class="comment-cards">
+        <div class="comment-card">
+            <form>
+                <div class="form-group">
+                    <label for="content">add new comment</label>
+                    <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">post comment (Not Functional Yet)</button>
+            </form>
+        </div>
+        @if (!ArticleComments.Any())
+        {
+            <div class="comment-card">
+                <p>there are no comments for this article. be the first one to write one!</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var comment in ArticleComments)
+            {
+                <div class="comment-card">
+                    <div class="comment-meta">
+                        <span>By @comment.CommenterUsername</span>
+                        <span class="published-date">Published: @comment.CommentDate</span>
+                    </div>
+                    <div class="comment-content">
+                        @comment.Content
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
+
+    [Parameter]
+    public string ArticleID { get; set; }
+
+    // TEST DATA
+    protected override void OnInitialized()
+    {
+        var newComment1 = new ArticleComment
+        {
+            ArticleCommentID = 1,
+            ArticleID = 1,
+            CommenterUsername = "John Doe",
+            Content = "Comment 1 content",
+            CommentDate = "01-01-2000"
+        };
+
+        var newComment2 = new ArticleComment
+        {
+            ArticleCommentID = 2,
+            ArticleID = 2,
+            CommenterUsername = "John Doe",
+            Content = "Comment 2 content",
+            CommentDate = "01-02-2000"
+        };
+
+        ArticleComments.Add(newComment1);
+        ArticleComments.Add(newComment2);
+    }
+
+    // TODO: Get the list of comments for this article from the database
+}

@@ -1,0 +1,50 @@
+@page "/signup"
+@rendermode InteractiveServer
+
+@using WriteOn.Shared
+@using WriteOn.Components.Layout
+
+@inject NavigationManager NavigationManager
+
+<head>
+    <link href="css/loginsignup.css" rel="stylesheet" />
+</head>
+
+<h1>WriteOn</h1>
+<div class="container">
+    <div class="login-form">
+        <h2>sign up</h2>
+        <div class="form-group">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" @bind="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" id="email" name="email" @bind="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" @bind="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">confirm password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
+        </div>
+        <button class="btn-primary" @onclick="HandleSignup">sign up</button>
+        <div class="link">
+            <a href="/login">already have an account? login</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    public string Username { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public string ConfirmPassword { get; set; }
+
+    private void HandleSignup()
+    {
+        // TODO
+    }
+}
