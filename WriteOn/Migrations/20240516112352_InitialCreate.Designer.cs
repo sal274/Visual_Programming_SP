@@ -10,7 +10,7 @@ using WriteOn.Data;
 namespace WriteOn.Migrations
 {
     [DbContext(typeof(WriteOnDbContext))]
-    [Migration("20240516072826_InitialCreate")]
+    [Migration("20240516112352_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

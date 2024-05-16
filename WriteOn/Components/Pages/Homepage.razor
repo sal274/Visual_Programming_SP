@@ -5,6 +5,9 @@
 @layout MainLayout
 
 @using WriteOn.Models
+@using WriteOn.Data
+
+@inject WriteOnDbContext DbContext
 
 <PageTitle>homepage</PageTitle>
 
@@ -45,10 +48,17 @@
 </div>
 
 @code {
-    private List<Article> Articles { get; set; } = new List<Article>();
+    public List<Article>? Articles { get; set; } = new List<Article>();
 
     protected override void OnInitialized()
     {
-        // TODO: Get the list of articles from the database
+        try
+        {
+            Articles = DbContext.Articles.ToList();
+        }
+        catch
+        {
+            return;
+        }
     }
 }
