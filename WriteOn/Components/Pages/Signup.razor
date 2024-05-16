@@ -1,14 +1,34 @@
 @page "/signup"
 @rendermode InteractiveServer
 
+@using WriteOn.Models
+@using WriteOn.Data
 @using WriteOn.Shared
 @using WriteOn.Components.Layout
 
+@layout EmptyLayout
+
 @inject NavigationManager NavigationManager
+@inject WriteOnDbContext DbContext
+@inject CurrentUserState CurrentUserState
+
+<PageTitle>sign up</PageTitle>
 
 <head>
     <link href="css/loginsignup.css" rel="stylesheet" />
 </head>
+
+<div class="@notUniqueAlertClass">
+    username must be unique; try a different username
+</div>
+
+<div class="@passwdDontMatchAlert">
+    passwords do not match; try again
+</div>
+
+<div class="@emptyCredentialsAlert">
+    some of the fields are blank; please provide all the information
+</div>
 
 <h1>WriteOn</h1>
 <div class="container">
@@ -38,13 +58,116 @@
 </div>
 
 @code {
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string ConfirmPassword { get; set; }
+    public required string Username { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
+    public required string ConfirmPassword { get; set; }
+
+    private string notUniqueAlertClass = "alert hidden";
+    private string passwdDontMatchAlert = "alert hidden";
+    private string emptyCredentialsAlert = "alert hidden";
 
     private void HandleSignup()
     {
-        // TODO
+        if (String.IsNullOrEmpty(Username) ||
+                String.IsNullOrEmpty(Email) ||
+                String.IsNullOrEmpty(Password) ||
+                String.IsNullOrEmpty(ConfirmPassword))
+        {
+            notUniqueAlertClass = "alert hidden";
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert";
+            return;
+        }
+
+        Models.UserCredentials? user = null;
+        try
+        {
+            user = DbContext.UserCredentials
+                .Single(u => u.Username == CurrentUserState.Username);
+        } catch (InvalidOperationException)
+        {
+            // Add user if database is empty
+            if (Password != ConfirmPassword)
+            {
+                notUniqueAlertClass = "alert hidden";
+                emptyCredentialsAlert = "alert hidden";
+                passwdDontMatchAlert = "alert";
+                return;
+            }
+            AddUserToDB(Username, Email, Password);
+            CurrentUserState.Username = Username;
+            CurrentUserState.Password = Password;
+            notUniqueAlertClass = "alert hidden";
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            NavigationManager.NavigateTo("/home");
+            return;
+        }
+
+        if (user != null)
+        {
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            notUniqueAlertClass = "alert";
+            return;
+        }
+
+        if (Password != ConfirmPassword)
+        {
+            notUniqueAlertClass = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            passwdDontMatchAlert = "alert";
+            return;
+        }
+
+        AddUserToDB(Username, Email, Password);
+        CurrentUserState.Username = Username;
+        CurrentUserState.Password = Password;
+        notUniqueAlertClass = "alert hidden";
+        passwdDontMatchAlert = "alert hidden";
+        emptyCredentialsAlert = "alert hidden";
+        NavigationManager.NavigateTo("/home");
+    }
+
+    void AddUserToDB(String Username, String Email, String Password)
+    {
+        var uniqueUserAccountID = Guid.NewGuid().ToString();
+        var uniqueUserCredentialsID = Guid.NewGuid().ToString();
+
+        DbContext.UserAccounts.Add(new UserAccount
+            {
+                UserAccountID = uniqueUserAccountID,
+                Username = Username
+            }
+        );
+
+        DbContext.UserCredentials.Add(new UserCredentials
+            {
+                UserCredentialsID = uniqueUserCredentialsID,
+                Username = Username,
+                Password = Password
+            }
+        );
+
+        DbContext.Users.Add(new User
+            {
+                Username = Username,
+                Email = Email,
+                UserAccountID = uniqueUserAccountID,
+                UserCredentialsID = uniqueUserCredentialsID
+            }
+        );
+
+        DbContext.AccessRights.Add(new AccessRights
+            {
+                AccessRightsID = Guid.NewGuid().ToString(),
+                Username = Username,
+                IsAdmin = false,
+                IsModerator = false
+            }
+        );
+
+        DbContext.SaveChanges();
     }
 }

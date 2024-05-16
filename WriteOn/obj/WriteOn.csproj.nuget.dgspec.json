@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj": {}
+    "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj": {
+    "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj",
+        "projectUniqueName": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj",
         "projectName": "WriteOn",
-        "projectPath": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj",
+        "projectPath": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\WriteOn.csproj",
         "packagesPath": "C:\\Users\\me\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\obj\\",
+        "outputPath": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\me\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,6 +46,12 @@
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.5, )"
             },

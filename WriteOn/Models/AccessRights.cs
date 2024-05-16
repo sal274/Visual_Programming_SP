@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace WriteOn.Models;
 
 public class AccessRights
 {
-    public required int AccessRightsID { get; set; }  // Primary key for AccessRights table
+    [Key]
+    public required string AccessRightsID { get; set; }  // Primary key for AccessRights table
     public required string Username { get; set; }  // Foreign key referencing User (could be Admin or Moderator)
-    public required int IsAdmin { get; set; }
-    public required int IsModerator { get; set; }
+    public required bool IsAdmin { get; set; }
+    public required bool IsModerator { get; set; }
 }

@@ -7,6 +7,8 @@
 
 @using WriteOn.Models
 
+<PageTitle>comments</PageTitle>
+
 <head>
     <link href="css/commentspage.css" rel="stylesheet" />
 </head>
@@ -51,31 +53,8 @@
 
     [Parameter]
     public string ArticleID { get; set; }
-
-    // TEST DATA
     protected override void OnInitialized()
     {
-        var newComment1 = new ArticleComment
-        {
-            ArticleCommentID = 1,
-            ArticleID = 1,
-            CommenterUsername = "John Doe",
-            Content = "Comment 1 content",
-            CommentDate = "01-01-2000"
-        };
-
-        var newComment2 = new ArticleComment
-        {
-            ArticleCommentID = 2,
-            ArticleID = 2,
-            CommenterUsername = "John Doe",
-            Content = "Comment 2 content",
-            CommentDate = "01-02-2000"
-        };
-
-        ArticleComments.Add(newComment1);
-        ArticleComments.Add(newComment2);
+        // TODO: Get the list of comments for this article from the database   
     }
-
-    // TODO: Get the list of comments for this article from the database
 }

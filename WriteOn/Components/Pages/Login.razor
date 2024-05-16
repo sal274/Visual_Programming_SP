@@ -2,16 +2,29 @@
 @page "/login"
 @rendermode InteractiveServer
 
+@using WriteOn.Data
 @using WriteOn.Shared
 @using WriteOn.Components.Layout
 
 @layout EmptyLayout
 
+@inject NavigationManager NavigationManager
+@inject WriteOnDbContext DbContext
 @inject CurrentUserState CurrentUserState
+
+<PageTitle>login</PageTitle>
 
 <head>
     <link href="css/loginsignup.css" rel="stylesheet" />
 </head>
+
+<div class="@incorrectCredentialsAlertClass">
+    incorrect username or password; try again
+</div>
+
+<div class="@emptyCredentialsAlert">
+    some of the fields are blank; please provide all the information
+</div>
 
 <h1>WriteOn</h1>
 <div class="container">
@@ -25,7 +38,7 @@
             <label for="password">password</label>
             <input type="password" id="password" name="password" @bind="CurrentUserState.Password" required>
         </div>
-        <button class="btn-primary" @onclick="HandleLogin">Login</button>
+        <button class="btn-primary" @onclick="HandleLogin">login</button>
         <div class="link">
             <a href="/signup">don't have an account? sign up</a>
         </div>
@@ -33,8 +46,48 @@
 </div>
 
 @code {
+    private string incorrectCredentialsAlertClass = "alert hidden";
+    private string emptyCredentialsAlert = "alert hidden";
     private void HandleLogin()
     {
-        // TODO
+        if (String.IsNullOrEmpty(CurrentUserState.Username) ||
+                String.IsNullOrEmpty(CurrentUserState.Password))
+        {
+            incorrectCredentialsAlertClass = "alert hidden";
+            emptyCredentialsAlert = "alert";
+            return;
+        }
+
+        Models.UserCredentials? user = null;
+        try
+        {
+            user = DbContext.UserCredentials
+                .Single(u => u.Username == CurrentUserState.Username);
+        } catch (InvalidOperationException)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+        
+        if (user == null)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+
+        var password = user.Password;
+
+        if (password != CurrentUserState.Password)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+
+        emptyCredentialsAlert = "alert hidden";
+        incorrectCredentialsAlertClass = "alert hidden";
+        NavigationManager.NavigateTo("/home");
     }
 }

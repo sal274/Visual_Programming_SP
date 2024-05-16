@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RV315kclEy1f3qG0vnRB9a+onpxsj7g3Bf7UNcD91qw=",
+  "Hash": "vBQX2/Kbtyo8dyQMcPsBKOdQGU8+Z1LrIQUvkPboiYw=",
   "Source": "WriteOn",
   "BasePath": "_content/WriteOn",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "WriteOn\\wwwroot",
       "Source": "WriteOn",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\commentspage.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\commentspage.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/commentspage.css",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\css\\commentspage.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\homepage.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\homepage.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/homepage.css",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\css\\homepage.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\loginsignup.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\loginsignup.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/loginsignup.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\css\\loginsignup.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\mainlayout.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\mainlayout.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/mainlayout.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\css\\mainlayout.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\profilepage.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\profilepage.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/profilepage.css",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\css\\profilepage.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\reviewpage.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\reviewpage.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/reviewpage.css",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\css\\reviewpage.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\site.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\site.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\writingpage.css",
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\css\\writingpage.css",
       "SourceId": "WriteOn",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
       "BasePath": "_content/WriteOn",
       "RelativePath": "css/writingpage.css",
       "AssetKind": "All",

@@ -6,6 +6,8 @@
 
 @using WriteOn.Models
 
+<PageTitle>homepage</PageTitle>
+
 <head>
     <link href="css/homepage.css" rel="stylesheet" />
 </head>
@@ -45,32 +47,8 @@
 @code {
     private List<Article> Articles { get; set; } = new List<Article>();
 
-    // TEST DATA
     protected override void OnInitialized()
     {
-        var newArticle1 = new Article
-        {
-            ArticleID = 1,
-            AuthorUsername = "John Doe",
-            Title = "Article 1",
-            Content = "Article 1 content",
-            PublishDate = "01-01-2000",
-            Category = "Fiction"
-        };
-
-        var newArticle2 = new Article
-        {
-            ArticleID = 2,
-            AuthorUsername = "Jane Doe",
-            Title = "Article 2",
-            Content = "Article 2 content",
-            PublishDate = "01-02-2000",
-            Category = "Non-fiction"
-        };
-
-        Articles.Add(newArticle1);
-        Articles.Add(newArticle2);
+        // TODO: Get the list of articles from the database
     }
-
-    // TODO: Get the list of articles from the database
 }

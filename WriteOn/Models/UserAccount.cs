@@ -1,9 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace WriteOn.Models;
 
 public class UserAccount
 {
-    public required int UserAccountID { get; set; }  // Primary key for UserAccount table
+    [Key]
+    public required string UserAccountID { get; set; }  // Primary key for UserAccount table
     public required string Username { get; set; }  // Foreign key referencing User
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
 }
