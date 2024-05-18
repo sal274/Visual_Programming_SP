@@ -27,7 +27,7 @@
 
 @code {
     [Parameter]
-    public string ArticleID { get; set; }
+    public required string ArticleID { get; set; }
     public string ReviewContent { get; set; } = string.Empty;
     
     private void SubmitArticle()
