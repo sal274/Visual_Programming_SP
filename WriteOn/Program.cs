@@ -1,7 +1,6 @@
 using WriteOn.Components;
 
 using WriteOn.Data;
-using WriteOn.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +9,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSqlite<WriteOnDbContext>("Data Source=WriteOnDatabase.db");
-builder.Services.AddScoped<CurrentUserState>();
 
 var app = builder.Build();
 

@@ -103,10 +103,6 @@ namespace WriteOn.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -174,6 +170,23 @@ namespace WriteOn.Migrations
                     b.HasKey("ArticleReviewID");
 
                     b.ToTable("ArticleReviews");
+                });
+
+            modelBuilder.Entity("WriteOn.Models.CurrentUserState", b =>
+                {
+                    b.Property<string>("Username")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("LoggedIn")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Username");
+
+                    b.ToTable("UserState");
                 });
 
             modelBuilder.Entity("WriteOn.Models.ModAccount", b =>

@@ -22,4 +22,5 @@ public class WriteOnDbContext : DbContext
   public DbSet<ModAccount> ModAccounts { get; set; }
   public DbSet<ModCredentials> ModCredentials { get; set; }
   public DbSet<AccessRights> AccessRights { get; set; }
+  public DbSet<CurrentUserState> UserState { get; set;}
 }

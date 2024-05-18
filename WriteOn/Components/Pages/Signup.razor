@@ -3,14 +3,12 @@
 
 @using WriteOn.Models
 @using WriteOn.Data
-@using WriteOn.Shared
 @using WriteOn.Components.Layout
 
 @layout EmptyLayout
 
 @inject NavigationManager NavigationManager
 @inject WriteOnDbContext DbContext
-@inject CurrentUserState CurrentUserState
 
 <PageTitle>sign up</PageTitle>
 
@@ -67,6 +65,21 @@
     private string passwdDontMatchAlert = "alert hidden";
     private string emptyCredentialsAlert = "alert hidden";
 
+    protected override void OnInitialized()
+    {
+        // Remove previous session info
+        try
+        {
+            var session = DbContext.UserState.ToList();
+            DbContext.UserState.RemoveRange(session);
+            DbContext.SaveChanges();
+        }
+        catch
+        {
+            // No session found; do nothing
+        }
+    }
+
     private void HandleSignup()
     {
         if (String.IsNullOrEmpty(Username) ||
@@ -84,7 +97,7 @@
         try
         {
             user = DbContext.UserCredentials
-                .Single(u => u.Username == CurrentUserState.Username);
+                .Single(u => u.Username == Username);
         } catch (InvalidOperationException)
         {
             // Add user if database is empty
@@ -96,8 +109,16 @@
                 return;
             }
             AddUserToDB(Username, Email, Password);
-            CurrentUserState.Username = Username;
-            CurrentUserState.Password = Password;
+
+            DbContext.UserState.Add(new CurrentUserState
+                {
+                    Username = Username,
+                    Password = Password,
+                    LoggedIn = true
+                }
+            );
+            DbContext.SaveChanges();
+
             notUniqueAlertClass = "alert hidden";
             passwdDontMatchAlert = "alert hidden";
             emptyCredentialsAlert = "alert hidden";
@@ -122,8 +143,16 @@
         }
 
         AddUserToDB(Username, Email, Password);
-        CurrentUserState.Username = Username;
-        CurrentUserState.Password = Password;
+
+        DbContext.UserState.Add(new CurrentUserState
+            {
+                Username = Username,
+                Password = Password,
+                LoggedIn = true
+            }
+        );
+        DbContext.SaveChanges();
+
         notUniqueAlertClass = "alert hidden";
         passwdDontMatchAlert = "alert hidden";
         emptyCredentialsAlert = "alert hidden";

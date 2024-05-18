@@ -3,14 +3,13 @@
 @rendermode InteractiveServer
 
 @using WriteOn.Data
-@using WriteOn.Shared
 @using WriteOn.Components.Layout
+@using WriteOn.Models
 
 @layout EmptyLayout
 
 @inject NavigationManager NavigationManager
 @inject WriteOnDbContext DbContext
-@inject CurrentUserState CurrentUserState
 
 <PageTitle>login</PageTitle>
 
@@ -32,11 +31,11 @@
         <h2>login</h2>
         <div class="form-group">
             <label for="username">username</label>
-            <input type="text" id="username" name="username" @bind="CurrentUserState.Username" required>
+            <input type="text" id="username" name="username" @bind="Username" required>
         </div>
         <div class="form-group">
             <label for="password">password</label>
-            <input type="password" id="password" name="password" @bind="CurrentUserState.Password" required>
+            <input type="password" id="password" name="password" @bind="Password" required>
         </div>
         <button class="btn-primary" @onclick="HandleLogin">login</button>
         <div class="link">
@@ -47,12 +46,30 @@
 
 @code {
     private string incorrectCredentialsAlertClass = "alert hidden";
-    private string emptyCredentialsAlert = "alert hidden"; 
+    private string emptyCredentialsAlert = "alert hidden";
+
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Remove previous session info
+        try
+        {
+            var session = DbContext.UserState.ToList();
+            DbContext.UserState.RemoveRange(session);
+            DbContext.SaveChanges();
+        }
+        catch
+        {
+            // No session found; do nothing
+        }
+    }
 
     private void HandleLogin()
     {
-        if (String.IsNullOrEmpty(CurrentUserState.Username) ||
-                String.IsNullOrEmpty(CurrentUserState.Password))
+        if (String.IsNullOrEmpty(Username) ||
+                String.IsNullOrEmpty(Password))
         {
             incorrectCredentialsAlertClass = "alert hidden";
             emptyCredentialsAlert = "alert";
@@ -63,7 +80,7 @@
         try
         {
             user = DbContext.UserCredentials
-                .Single(u => u.Username == CurrentUserState.Username);
+                .Single(u => u.Username == Username);
         } catch (InvalidOperationException)
         {
             emptyCredentialsAlert = "alert hidden";
@@ -80,7 +97,7 @@
 
         var password = user.Password;
 
-        if (password != CurrentUserState.Password)
+        if (password != Password)
         {
             emptyCredentialsAlert = "alert hidden";
             incorrectCredentialsAlertClass = "alert";
@@ -89,6 +106,16 @@
 
         emptyCredentialsAlert = "alert hidden";
         incorrectCredentialsAlertClass = "alert hidden";
-        NavigationManager.NavigateTo("/home");
+
+        DbContext.UserState.Add(new CurrentUserState
+            {
+                Username = Username,
+                Password = Password,
+                LoggedIn = true
+            }
+        );
+        DbContext.SaveChanges();
+
+        NavigationManager.NavigateTo("/home", forceLoad: true);
     }
 }

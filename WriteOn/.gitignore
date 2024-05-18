@@ -1,1 +1,5 @@
 bin/
+Migrations/
+WriteOnDatabase.db
+WriteOnDatabase.db-shm
+WriteOnDatabase.db-wal
