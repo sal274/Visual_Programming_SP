@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Article.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcnRpY2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/ArticleReviews.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcnRpY2xlUmV2aWV3cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

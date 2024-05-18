@@ -58,7 +58,7 @@
             return;
         }
 
-        DbContext.Articles.Add(new Article
+        DbContext.Articles.Add(new Models.Article
             {
                 ArticleID = Guid.NewGuid().ToString(),
                 AuthorUsername = CurrentUserInfo.Username,

@@ -1,0 +1,55 @@
+@page "/article/{ArticleID}"
+@rendermode InteractiveServer
+
+@using WriteOn.Components.Layout
+
+@layout MainLayout
+
+@using WriteOn.Models
+@using WriteOn.Data
+
+@inject WriteOnDbContext DbContext
+
+<PageTitle>homepage</PageTitle>
+
+<head>
+    <link href="css/homepage.css" rel="stylesheet" />
+</head>
+
+<div class="homepage-container">
+    <div class="article-card">
+        <h2>@ArticleData.Title</h2>
+        <div class="article-meta">
+            <span>by @ArticleData.AuthorUsername</span>
+            <span class="published-date">published: @ArticleData.PublishDate</span>
+        </div>
+        <div class="article-content">
+            @ArticleData.Content
+        </div>
+        <div class="article-footer">
+            <span><a href="/comments/@ArticleData.ArticleID"><button class="btn-primary">comments</button></a></span>
+            <span><a href="/review/@ArticleData.ArticleID"><button class="btn-primary">review</button></a></span>
+            <span><a href="/user/@ArticleData.AuthorUsername"><button class="btn-primary">writer
+                        profile</button></a></span>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public required string ArticleID { get; set; }
+    public required Models.Article ArticleData { get; set; }
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            ArticleData = DbContext.Articles
+            .Single(a => a.ArticleID == ArticleID);
+        }
+        catch (InvalidOperationException)
+        {
+            return;
+        }
+    }
+}

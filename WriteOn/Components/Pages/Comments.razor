@@ -1,11 +1,15 @@
 @page "/comments/{ArticleID}"
-@* @rendermode InteractiveServer *@
+@rendermode InteractiveServer
 
 @using WriteOn.Components.Layout
 
 @layout MainLayout
 
 @using WriteOn.Models
+@using WriteOn.Data
+
+@inject WriteOnDbContext DbContext
+@inject NavigationManager NavigationManager
 
 <PageTitle>comments</PageTitle>
 
@@ -19,9 +23,9 @@
             <form>
                 <div class="form-group">
                     <label for="content">add new comment</label>
-                    <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="6" @bind="CommentContent" @bind:event="oninput" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">post comment (Not Functional Yet)</button>
+                <button class="btn btn-primary" @onclick="PostComment">post comment</button>
             </form>
         </div>
         @if (!ArticleComments.Any())
@@ -49,12 +53,58 @@
 </div>
 
 @code {
-    private List<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
-
     [Parameter]
-    public string ArticleID { get; set; }
+    public required string ArticleID { get; set; }
+    private List<ArticleComment> ArticleComments { get; set; } = new List<ArticleComment>();
+    public string CommentContent { get; set; } = string.Empty;
     protected override void OnInitialized()
     {
-        // TODO: Get the list of comments for this article from the database   
+        try
+        {
+            ArticleComments = DbContext.ArticleComments
+                .Where(c => c.ArticleID == ArticleID)
+                .ToList();
+        }
+        catch (InvalidOperationException)
+        {
+            return;
+        }
+    }
+
+    private void PostComment()
+    {
+        if (String.IsNullOrEmpty(CommentContent))
+        {
+            return;
+        }
+
+        CurrentUserState? CurrentUserInfo = null;
+        try
+        {
+            CurrentUserInfo = DbContext.UserState.FirstOrDefault();
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("login");
+            return;
+        }
+
+        if (CurrentUserInfo == null)
+        {
+            NavigationManager.NavigateTo("login");
+            return;
+        }
+
+        DbContext.ArticleComments.Add(new ArticleComment
+            {
+                ArticleCommentID = Guid.NewGuid().ToString(),
+                ArticleID = ArticleID,
+                CommenterUsername = CurrentUserInfo.Username,
+                Content = CommentContent,
+                CommentDate = DateTime.Today.ToString("d")
+            }
+        );
+        DbContext.SaveChanges();
+        CommentContent = string.Empty;
     }
 }
