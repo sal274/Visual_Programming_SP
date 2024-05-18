@@ -1,4 +1,4 @@
-﻿@page "/home"
+@page "/reviews/{ArticleID}"
 @rendermode InteractiveServer
 
 @using WriteOn.Components.Layout
@@ -18,29 +18,26 @@
 
 <div class="homepage-container">
     <div class="article-cards">
-        @if (!Articles.Any())
+        @if (!Reviews.Any())
         {
             <div class="article-card">
-                <p>There are no articles yet. Be the first one to write one!</p>
+                <p>There are no reviews for this article</p>
             </div>
         }
         else
         {
-            @foreach (var article in Articles)
+            @foreach (var review in Reviews)
             {
                 <div class="article-card">
-                    <h2>@article.Title</h2>
                     <div class="article-meta">
-                        <span>by @article.AuthorUsername</span>
-                        <span class="published-date">published: @article.PublishDate</span>
+                        <span>by @review.ReviewerUsername</span>
+                        <span class="published-date">published: @review.ReviewDate</span>
                     </div>
                     <div class="article-content">
-                        @article.Content
+                        @review.Content
                     </div>
                     <div class="article-footer">
-                        <span><a href="/comments/@article.ArticleID"><button class="btn-primary">comments</button></a></span>
-                        <span><a href="/review/@article.ArticleID"><button class="btn-primary">review</button></a></span>
-                        <span><a href="/user/@article.AuthorUsername"><button class="btn-primary">writer
+                        <span><a href="/user/@review.ReviewerUsername"><button class="btn-primary">writer
                                     profile</button></a></span>
                     </div>
                 </div>
@@ -50,13 +47,17 @@
 </div>
 
 @code {
-    public List<Article>? Articles { get; set; } = new List<Article>();
+    [Parameter]
+    public required string ArticleID { get; set; }
+    public List<ArticleReview>? Reviews { get; set; } = new List<ArticleReview>();
 
     protected override void OnInitialized()
     {
         try
         {
-            Articles = DbContext.Articles.ToList();
+            Reviews = DbContext.ArticleReviews
+                .Where(r => r.ArticleID == ArticleID)
+                .ToList();
         }
         catch (InvalidOperationException)
         {

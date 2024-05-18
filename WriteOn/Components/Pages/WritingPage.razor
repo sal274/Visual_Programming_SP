@@ -17,7 +17,7 @@
     <link href="css/writingpage.css" rel="stylesheet" />
 </head>
 
-<div class="new-article-form">
+<form>
     <div class="form-group">
         <label for="title">title</label>
         <input type="text" class="form-control" id="title" name="title" @bind="ArticleTitle" required>
@@ -27,7 +27,7 @@
         <textarea class="form-control" id="content" name="content" rows="20" @bind="ArticleContent" @bind:event="oninput" required></textarea>
     </div>
     <button class="btn btn-primary" @onclick="PostArticle">post</button>
-</div>
+</form>
 
 @code {
     public string ArticleTitle { get; set; } = string.Empty;

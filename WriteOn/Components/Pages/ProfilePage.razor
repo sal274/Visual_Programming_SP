@@ -2,15 +2,19 @@
 @rendermode InteractiveServer
 
 @using WriteOn.Components.Layout
+@using WriteOn.Data
+@using WriteOn.Models
 
-@layout WriteOn.Components.Layout.MainLayout
+@layout MainLayout
 
 @inject NavigationManager NavigationManager
+@inject WriteOnDbContext DbContext
 
 <PageTitle>my profile</PageTitle>
 
 <head>
     <link href="css/profilepage.css" rel="stylesheet" />
+    <link href="css/homepage.css" rel="stylesheet" />
 </head>
 
 <div class="profile-container">
@@ -21,30 +25,112 @@
         <div class="profile-info">
             <div class="profile-details">
                 <span>username:</span>
-                <span>PLACEHOLDER VALUE</span>
-            </div>
-            <div class="profile-details">
-                <span>full name:</span>
-                <span>PLACEHOLDER VALUE</span>
+                <span>@Username</span>
             </div>
             <div class="profile-details">
                 <span>email:</span>
-                <span>PLACEHOLDER VALUE</span>
+                <span>@Email</span>
             </div>
         </div>
     </div>
     <h2>my articles</h2>
-    <div class="article-list">
-        <h3>no articles yet</h3>
+    <div class="article-cards">
+        @if (!Articles.Any())
+        {
+            <div class="article-card">
+                <p>you have no articles</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var article in Articles)
+            {
+                <div class="article-card">
+                    <h2>@article.Title</h2>
+                    <div class="article-meta">
+                        <span class="published-date">published: @article.PublishDate</span>
+                    </div>
+                    <div class="article-content">
+                        @article.Content
+                    </div>
+                    <div class="article-footer">
+                        <span><a href="/comments/@article.ArticleID"><button class="btn-primary">comments</button></a></span>
+                        <span><a href="/reviews/@article.ArticleID"><button class="btn-primary">reviews</button></a></span>
+                    </div>
+                </div>
+            }
+        }
     </div>
     <h2>my reviews</h2>
-    <div class="article-list">
-        <h3>no reviews yet</h3>
+    <div class="article-cards">
+        @if (!Reviews.Any())
+        {
+            <div class="article-card">
+                <p>you have not reviewed any articles</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var review in Reviews)
+            {
+                <div class="article-card">
+                    <div class="article-meta">
+                        <span class="published-date">submitted: @review.ReviewDate</span>
+                    </div>
+                    <div class="article-content">
+                        @review.Content
+                    </div>
+                    <div class="article-footer">
+                        <span><a href="/article/@review.ArticleID"><button class="btn-primary">article</button></a></span>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
 
 @code {
-    // TODO: Get current user's data from the database using the id
-    // in CurrentUserState, and replace above PLACEHOLDERS with
-    // retrieved values
+    public string Username { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public List<Article>? Articles { get; set; } = new List<Article>();
+    public List<ArticleReview>? Reviews { get; set; } = new List<ArticleReview>();
+    public string ReviewArticleTitle { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        CurrentUserState? userInfo;
+        try
+        {
+            userInfo = DbContext.UserState.First();
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("login");
+            return;
+        }
+
+        var user = DbContext.Users
+        .Single(u => u.Username == userInfo.Username);
+
+        Username = user.Username;
+        Email = user.Email;
+
+        try
+        {
+            Articles = DbContext.Articles.ToList();
+        }
+        catch (InvalidOperationException)
+        {
+            Articles = [];
+        }
+
+        try
+        {
+            Reviews = DbContext.ArticleReviews.ToList();
+        }
+        catch (InvalidOperationException)
+        {
+            Reviews = [];
+        }
+    }
 }

@@ -1,11 +1,15 @@
 @page "/review/{ArticleID}"
-@* @rendermode InteractiveServer *@
+@rendermode InteractiveServer
 
 @using WriteOn.Components.Layout
 
-@layout WriteOn.Components.Layout.MainLayout
+@layout MainLayout
 
 @using WriteOn.Models
+@using WriteOn.Data
+
+@inject WriteOnDbContext DbContext
+@inject NavigationManager NavigationManager
 
 <PageTitle>review</PageTitle>
 
@@ -13,17 +17,53 @@
     <link href="css/reviewpage.css" rel="stylesheet" />
 </head>
 
-<form method="post">
+<form>
     <div class="form-group">
         <label for="content">your review</label>
-        <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+        <textarea class="form-control" id="content" name="content" rows="20" @bind="ReviewContent" @bind:event="oninput" required></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">submit review (Not Functional Yet)</button>
+    <button class="btn btn-primary" @onclick="SubmitArticle">submit review</button>
 </form>
 
 @code {
     [Parameter]
     public string ArticleID { get; set; }
+    public string ReviewContent { get; set; } = string.Empty;
     
-    // TODO: Save article review in database
+    private void SubmitArticle()
+    {
+        if (String.IsNullOrEmpty(ReviewContent))
+        {
+            return;
+        }
+
+        CurrentUserState? CurrentUserInfo = null;
+        try
+        {
+            CurrentUserInfo = DbContext.UserState.FirstOrDefault();
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("login");
+            return;
+        }
+
+        if (CurrentUserInfo == null)
+        {
+            NavigationManager.NavigateTo("login");
+            return;
+        }
+
+        DbContext.ArticleReviews.Add(new ArticleReview
+            {
+                ArticleReviewID = Guid.NewGuid().ToString(),
+                ArticleID = ArticleID,
+                ReviewerUsername = CurrentUserInfo.Username,
+                Content = ReviewContent,
+                ReviewDate = DateTime.Today.ToString("d")
+            }
+        );
+        DbContext.SaveChanges();
+        NavigationManager.NavigateTo(NavigationManager.BaseUri + "home", forceLoad: true);
+    }
 }
