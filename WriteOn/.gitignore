@@ -1,4 +1,5 @@
 bin/
+obj/
 Migrations/
 WriteOnDatabase.db
 WriteOnDatabase.db-shm
