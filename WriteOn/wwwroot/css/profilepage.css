@@ -7,12 +7,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
     padding: 20px;
 }
 
 .profile-header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,27 +31,4 @@ body {
 .profile-details span:first-child {
     font-weight: bold;
     margin-right: 10px;
-}
-
-.article-list {
-    margin-top: 20px;
-}
-
-.article-list h3 {
-    margin-bottom: 10px;
-}
-
-.article-item {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.article-item a {
-    text-decoration: none;
-    color: black;
-}
-
-.article-item a:hover {
-    text-decoration: underline;
 }

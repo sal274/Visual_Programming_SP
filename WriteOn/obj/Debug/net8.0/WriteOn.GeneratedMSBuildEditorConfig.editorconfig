@@ -9,63 +9,67 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WriteOn
 build_property.RootNamespace = WriteOn
-build_property.ProjectDir = C:\Users\me\Documents\GitHub\Visual_Programming_SP\WriteOn\
+build_property.ProjectDir = c:\Users\me\Documents\GitHub\Visual_Programming_SP\WriteOn\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\me\Documents\GitHub\Visual_Programming_SP\WriteOn
+build_property.MSBuildProjectDirectory = c:\Users\me\Documents\GitHub\Visual_Programming_SP\WriteOn
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/App.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Layout/EmptyLayout.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Layout/EmptyLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRW1wdHlMYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Layout/MainLayout.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Comments.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/ArticleReviews.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBcnRpY2xlUmV2aWV3cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Comments.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb21tZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Homepage.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Homepage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lcGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Login.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/ProfilePage.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/ProfilePage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9maWxlUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Review.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Review.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZXZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Signup.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/Signup.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTaWdudXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/WriterProfile.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/WriterProfile.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXcml0ZXJQcm9maWxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/WritingPage.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Pages/WritingPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXcml0aW5nUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Routes.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/_Imports.razor]
+[c:/Users/me/Documents/GitHub/Visual_Programming_SP/WriteOn/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
