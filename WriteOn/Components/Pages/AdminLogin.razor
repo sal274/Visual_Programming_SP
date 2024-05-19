@@ -1,0 +1,120 @@
+@page "/admin-login"
+@rendermode InteractiveServer
+
+@using WriteOn.Data
+@using WriteOn.Components.Layout
+@using WriteOn.Models
+
+@layout EmptyLayout
+
+@inject NavigationManager NavigationManager
+@inject WriteOnDbContext DbContext
+
+<PageTitle>admin login</PageTitle>
+
+<head>
+    <link href="css/loginsignup.css" rel="stylesheet" />
+</head>
+
+<div class="@incorrectCredentialsAlertClass">
+    incorrect username or password; try again
+</div>
+
+<div class="@emptyCredentialsAlert">
+    some of the fields are blank; please provide all the information
+</div>
+
+<h1>WriteOn</h1>
+<div class="container">
+    <div class="login-form">
+        <h2>admin login</h2>
+        <div class="form-group">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" @bind="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" @bind="Password" required>
+        </div>
+        <button class="btn-primary" @onclick="HandleLogin">login</button>
+        <div class="link">
+            <a href="/signup">don't have an account? sign up</a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string incorrectCredentialsAlertClass = "alert hidden";
+    private string emptyCredentialsAlert = "alert hidden";
+
+    public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Remove previous session info
+        try
+        {
+            var session = DbContext.UserState.ToList();
+            DbContext.UserState.RemoveRange(session);
+            DbContext.SaveChanges();
+        }
+        catch
+        {
+            // No session found; do nothing
+        }
+    }
+
+    private void HandleLogin()
+    {
+        if (String.IsNullOrEmpty(Username) ||
+                String.IsNullOrEmpty(Password))
+        {
+            incorrectCredentialsAlertClass = "alert hidden";
+            emptyCredentialsAlert = "alert";
+            return;
+        }
+
+        Models.AdminCredentials? admin = null;
+        try
+        {
+            admin = DbContext.AdminCredentials
+                .Single(u => u.AdminUsername == Username);
+        } catch (InvalidOperationException)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+        
+        if (admin == null)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+
+        var password = admin.Password;
+
+        if (password != Password)
+        {
+            emptyCredentialsAlert = "alert hidden";
+            incorrectCredentialsAlertClass = "alert";
+            return;
+        }
+
+        emptyCredentialsAlert = "alert hidden";
+        incorrectCredentialsAlertClass = "alert hidden";
+
+        DbContext.UserState.Add(new CurrentUserState
+            {
+                Username = Username,
+                Password = Password,
+                LoggedIn = true
+            }
+        );
+        DbContext.SaveChanges();
+
+        NavigationManager.NavigateTo("/admin-panel", forceLoad: true);
+    }
+}

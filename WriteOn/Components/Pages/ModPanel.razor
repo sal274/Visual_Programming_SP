@@ -1,0 +1,136 @@
+@page "/mod-panel"
+@rendermode InteractiveServer
+
+@using Microsoft.EntityFrameworkCore
+@using WriteOn.Data
+@using WriteOn.Models
+
+@inject WriteOnDbContext DbContext
+@inject NavigationManager NavigationManager
+
+<head>
+    <link href="css/adminpanel.css" rel="stylesheet" />
+</head>
+
+@if (articles == null)
+{
+    <p>Loading...</p>
+}
+else if (articles.Count == 0)
+{
+    <p>No articles available.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Article ID</th>
+                <th>Author Username</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Publish Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in articles)
+            {
+                <tr>
+                    <td>@article.ArticleID</td>
+                    <td>@article.AuthorUsername</td>
+                    <td>@article.Title</td>
+                    <td>@article.Content</td>
+                    <td>@article.PublishDate</td>
+                    <td>
+                        <button @onclick="() => DeleteArticle(article.ArticleID)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Models.Article> articles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadArticles();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Models.CurrentUserState? currentUser = null;
+            try
+            {
+                currentUser = DbContext.UserState.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            if (currentUser == null)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            Models.Moderator? mod = null;
+            try
+            {
+                mod = DbContext.Moderators.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/mod-login", forceLoad: true);
+                return;
+            }
+
+            if (mod == null)
+            {
+                NavigationManager.NavigateTo("/mod-login", forceLoad: true);
+                return;
+            }
+
+            Models.AccessRights? modAccess = null;
+            try
+            {
+                modAccess = DbContext.AccessRights
+                .Single(a => a.Username == mod.Username);
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/mod-login", forceLoad: true);
+                return;
+            }
+
+            if (modAccess == null || !modAccess.IsModerator)
+            {
+                NavigationManager.NavigateTo("/mod-login", forceLoad: true);
+                return;
+            }
+        }
+    }
+
+    private async Task LoadArticles()
+    {
+        articles = await DbContext.Articles.ToListAsync();
+    }
+
+    private async Task DeleteArticle(string articleId)
+    {
+        var article = await DbContext.Articles.FindAsync(articleId);
+        if (article != null)
+        {
+            DbContext.Articles.Remove(article);
+            await DbContext.SaveChangesAsync();
+            await LoadArticles();
+            StateHasChanged();
+        }
+    }
+}

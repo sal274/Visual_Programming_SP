@@ -1,0 +1,225 @@
+@page "/add-moderator"
+@rendermode InteractiveServer
+
+@using WriteOn.Models
+@using WriteOn.Data
+@using WriteOn.Components.Layout
+
+@layout EmptyLayout
+
+@inject NavigationManager NavigationManager
+@inject WriteOnDbContext DbContext
+
+<PageTitle>sign up</PageTitle>
+
+<head>
+    <link href="css/loginsignup.css" rel="stylesheet" />
+</head>
+
+<div class="@notUniqueAlertClass">
+    username must be unique; try a different username
+</div>
+
+<div class="@passwdDontMatchAlert">
+    passwords do not match; try again
+</div>
+
+<div class="@emptyCredentialsAlert">
+    some of the fields are blank; please provide all the information
+</div>
+
+<div class="container">
+    <div class="login-form">
+        <h2>add moderator</h2>
+        <div class="form-group">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" @bind="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" id="email" name="email" @bind="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" @bind="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">confirm password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" @bind="ConfirmPassword" required>
+        </div>
+        <button class="btn-primary" @onclick="AddNewModerator">add moderator</button>
+    </div>
+</div>
+
+@code {
+    public required string Username { get; set; }
+    public required string Email { get; set; }
+    public required string Password { get; set; }
+    public required string ConfirmPassword { get; set; }
+
+    private string notUniqueAlertClass = "alert hidden";
+    private string passwdDontMatchAlert = "alert hidden";
+    private string emptyCredentialsAlert = "alert hidden";
+
+    private void AddNewModerator()
+    {
+        if (String.IsNullOrEmpty(Username) ||
+        String.IsNullOrEmpty(Email) ||
+        String.IsNullOrEmpty(Password) ||
+        String.IsNullOrEmpty(ConfirmPassword))
+        {
+            notUniqueAlertClass = "alert hidden";
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert";
+            return;
+        }
+
+        Models.ModCredentials? user = null;
+        try
+        {
+            user = DbContext.ModCredentials
+            .Single(u => u.ModeratorUsername == Username);
+        }
+        catch (InvalidOperationException)
+        {
+            // Add user if database is empty
+            if (Password != ConfirmPassword)
+            {
+                notUniqueAlertClass = "alert hidden";
+                emptyCredentialsAlert = "alert hidden";
+                passwdDontMatchAlert = "alert";
+                return;
+            }
+            AddModToDB(Username, Email, Password);
+
+            notUniqueAlertClass = "alert hidden";
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            return;
+        }
+
+        if (user != null)
+        {
+            passwdDontMatchAlert = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            notUniqueAlertClass = "alert";
+            return;
+        }
+
+        if (Password != ConfirmPassword)
+        {
+            notUniqueAlertClass = "alert hidden";
+            emptyCredentialsAlert = "alert hidden";
+            passwdDontMatchAlert = "alert";
+            return;
+        }
+
+        AddModToDB(Username, Email, Password);
+
+        notUniqueAlertClass = "alert hidden";
+        passwdDontMatchAlert = "alert hidden";
+        emptyCredentialsAlert = "alert hidden";
+        NavigationManager.NavigateTo("/home");
+    }
+
+    void AddModToDB(String Username, String Email, String Password)
+    {
+        var uniqueModAccountID = Guid.NewGuid().ToString();
+        var uniqueModCredentialsID = Guid.NewGuid().ToString();
+
+        DbContext.ModAccounts.Add(new ModAccount
+            {
+                ModAccountID = uniqueModAccountID,
+                ModeratorUsername = Username,
+                Email = Email
+            }
+        );
+
+        DbContext.ModCredentials.Add(new ModCredentials
+            {
+                ModCredentialsID = uniqueModCredentialsID,
+                ModeratorUsername = Username,
+                Password = Password
+            }
+        );
+
+        DbContext.Moderators.Add(new Moderator
+            {
+                Username = Username,
+                ModAccountID = uniqueModAccountID,
+                ModCredentialsID = uniqueModCredentialsID
+            }
+        );
+
+        DbContext.AccessRights.Add(new AccessRights
+            {
+                AccessRightsID = Guid.NewGuid().ToString(),
+                Username = Username,
+                IsAdmin = false,
+                IsModerator = true
+            }
+        );
+
+        DbContext.SaveChanges();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        // User must be admin to be able to add a moderator
+
+        if (firstRender)
+        {
+            Models.CurrentUserState? currentUser = null;
+            try
+            {
+                currentUser = DbContext.UserState.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            if (currentUser == null)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            Models.Admin? admin = null;
+            try
+            {
+                admin = DbContext.Admins.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            if (admin == null)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            Models.AccessRights? adminAccess = null;
+            try
+            {
+                adminAccess = DbContext.AccessRights
+                .Single(a => a.Username == admin.Username);
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            if (adminAccess == null || !adminAccess.IsAdmin)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+        }
+    }
+}

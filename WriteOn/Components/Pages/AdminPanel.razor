@@ -1,0 +1,159 @@
+@page "/admin-panel"
+@rendermode InteractiveServer
+
+@using Microsoft.EntityFrameworkCore
+@using WriteOn.Data
+@using WriteOn.Models
+
+@inject WriteOnDbContext DbContext
+@inject NavigationManager NavigationManager
+
+<head>
+    <link href="css/adminpanel.css" rel="stylesheet" />
+</head>
+
+<h3>Manage Database</h3>
+
+@if (dataDictionary != null)
+{
+    foreach (var table in dataDictionary)
+    {
+        <h4>@table.Key</h4>
+        if (table.Value != null && table.Value.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        @foreach (var property in table.Value.First().GetType().GetProperties())
+                        {
+                            <th>@property.Name</th>
+                        }
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in table.Value)
+                    {
+                        <tr>
+                            @foreach (var property in item.GetType().GetProperties())
+                            {
+                                <td>@property.GetValue(item)?.ToString()</td>
+                            }
+                            <td><button @onclick="() => DeleteRecord(table.Key, item)">Delete</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No records found.</p>
+        }
+    }
+}
+
+<a href="/add-moderator">add moderator</a>
+
+@code {
+    private Dictionary<string, List<object>> dataDictionary;
+
+    protected override void OnInitialized()
+    {
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        dataDictionary = new Dictionary<string, List<object>>();
+
+        // Get all DbSet properties
+        var dbSetProperties = typeof(WriteOnDbContext).GetProperties()
+            .Where(p => p.PropertyType.IsGenericType && 
+                        p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
+
+        foreach (var dbSetProperty in dbSetProperties)
+        {
+            var entityType = dbSetProperty.PropertyType.GetGenericArguments()[0];
+            var dbSet = dbSetProperty.GetValue(DbContext) as IQueryable<object>;
+
+            if (dbSet != null)
+            {
+                var dataList = dbSet.ToList();
+                dataDictionary.Add(dbSetProperty.Name, dataList);
+            }
+        }
+    }
+
+    private void DeleteRecord(string tableName, object record)
+    {
+        var dbSetProperty = typeof(WriteOnDbContext).GetProperty(tableName);
+        var dbSet = dbSetProperty?.GetValue(DbContext);
+
+        if (dbSet != null)
+        {
+            var removeMethod = dbSet.GetType().GetMethod("Remove");
+            removeMethod?.Invoke(dbSet, new[] { record });
+
+            DbContext.SaveChanges();
+            LoadData(); // Refresh the data
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            Models.CurrentUserState? currentUser = null;
+            try
+            {
+                currentUser = DbContext.UserState.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            if (currentUser == null)
+            {
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+                return;
+            }
+
+            Models.Admin? admin = null;
+            try
+            {
+                admin = DbContext.Admins.First();
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            if (admin == null)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            Models.AccessRights? adminAccess = null;
+            try
+            {
+                adminAccess = DbContext.AccessRights
+                    .Single(a => a.Username == admin.Username);
+            }
+            catch (InvalidOperationException)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+
+            if (adminAccess == null || !adminAccess.IsAdmin)
+            {
+                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+                return;
+            }
+        }
+    }
+}
