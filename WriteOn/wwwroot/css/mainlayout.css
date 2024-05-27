@@ -31,3 +31,9 @@ body {
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+.app-title .icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RC9LIzTz5SZLdjVfJF/C28WNInIQjNVWFYb+eha/Lf0=",
+  "Hash": "1RX7/A/rfPY0vqbh0rp6uJBCCPuREDa/i347K1DCU2Y=",
   "Source": "WriteOn",
   "BasePath": "_content/WriteOn",
   "Mode": "Default",
@@ -186,6 +186,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\writingpage.css"
+    },
+    {
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\favicon.png",
+      "SourceId": "WriteOn",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "BasePath": "_content/WriteOn",
+      "RelativePath": "favicon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\writeon16.png",
+      "SourceId": "WriteOn",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\me\\Documents\\GitHub\\Visual_Programming_SP\\WriteOn\\wwwroot\\",
+      "BasePath": "_content/WriteOn",
+      "RelativePath": "writeon16.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\writeon16.png"
     }
   ]
 }
