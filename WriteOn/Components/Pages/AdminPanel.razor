@@ -101,59 +101,56 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        if (firstRender)
+        Models.CurrentUserState? currentUser = null;
+        try
         {
-            Models.CurrentUserState? currentUser = null;
-            try
-            {
-                currentUser = DbContext.UserState.First();
-            }
-            catch (InvalidOperationException)
-            {
-                NavigationManager.NavigateTo("/login", forceLoad: true);
-                return;
-            }
+            currentUser = DbContext.UserState.First();
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("/login", forceLoad: true);
+            return;
+        }
 
-            if (currentUser == null)
-            {
-                NavigationManager.NavigateTo("/login", forceLoad: true);
-                return;
-            }
+        if (currentUser == null)
+        {
+            NavigationManager.NavigateTo("/login", forceLoad: true);
+            return;
+        }
 
-            Models.Admin? admin = null;
-            try
-            {
-                admin = DbContext.Admins.First();
-            }
-            catch (InvalidOperationException)
-            {
-                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
-                return;
-            }
+        Models.Admin? admin = null;
+        try
+        {
+            admin = DbContext.Admins.First();
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+            return;
+        }
 
-            if (admin == null)
-            {
-                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
-                return;
-            }
+        if (admin == null)
+        {
+            NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+            return;
+        }
 
-            Models.AccessRights? adminAccess = null;
-            try
-            {
-                adminAccess = DbContext.AccessRights
-                    .Single(a => a.Username == admin.Username);
-            }
-            catch (InvalidOperationException)
-            {
-                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
-                return;
-            }
+        Models.AccessRights? adminAccess = null;
+        try
+        {
+            adminAccess = DbContext.AccessRights
+                .Single(a => a.Username == currentUser.Username);
+        }
+        catch (InvalidOperationException)
+        {
+            NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+            return;
+        }
 
-            if (adminAccess == null || !adminAccess.IsAdmin)
-            {
-                NavigationManager.NavigateTo("/admin-login", forceLoad: true);
-                return;
-            }
+        if (adminAccess == null || !adminAccess.IsAdmin)
+        {
+            NavigationManager.NavigateTo("/admin-login", forceLoad: true);
+            return;
         }
     }
 }
